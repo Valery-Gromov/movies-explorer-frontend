@@ -1,7 +1,7 @@
 function Profile() {
     return (
         <div className="wrapper_form">
-            <div className="profile">
+            <section className="section">
                 <h2 className='profile__title'>Привет, Виталий!</h2>
                 <div className="profile__content">
                     <div className="profile__container">
@@ -21,7 +21,7 @@ function Profile() {
                         <a href="#" className="profile__link">Выйти из аккаунта</a>
                     </li>
                 </ul>
-            </div>
+            </section>
         </div>
     );
 }

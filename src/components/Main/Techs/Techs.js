@@ -1,7 +1,7 @@
 function Techs() {
     return (
         <div className="wrapper_techs">
-            <div className="techs section" id="techs">
+            <section className="techs section" id="techs">
                 <h2 className="techs__title section__title">Технологии</h2>
                 <div className="techs__content">
                     <div className="techs__text-container">
@@ -50,7 +50,7 @@ function Techs() {
                         </li>
                     </ul>
                 </div>
-            </div>
+            </section>
         </div>
     );
 }

@@ -8,15 +8,15 @@ function Header(props) {
 
     return (
         <div className="wrapper_header">
-            <div className="header section">
+            <section className="header section">
                 <Link className="header__logo" to='/' >
                     <img src={logo} alt='Логотип' />
                 </Link>
                 <NavBar burgerMenuOpen={burgerMenuOpen} />
-                <div onClick={() => setBurgerMenuOpen(!burgerMenuOpen)} className={`header__burger-btn`}>
+                <div onClick={() => setBurgerMenuOpen(!burgerMenuOpen)} className={burgerMenuOpen ? 'header__burger-btn active' : 'header__burger-btn'}>
                     <span/>
                 </div>
-            </div>
+            </section>
         </div>
     );
 }

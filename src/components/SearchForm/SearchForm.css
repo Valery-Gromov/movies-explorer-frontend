@@ -47,7 +47,7 @@
 }
 
 .search-form__checkbox-container {
-    width: 15%;
+    width: 170px;
     box-sizing: border-box;
     cursor: pointer;
     display: flex;
@@ -105,13 +105,8 @@ display: none;
         width: 100%;
     }
 
-    .search-form__checkbox-container {
-        width: 25%;
-    }
 }
 
 @media screen and (max-width: 321px) {
-    .search-form__checkbox-container {
-        width: 55%;
-    }
+
 }

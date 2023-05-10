@@ -15,7 +15,9 @@
 
 .App {
   max-width: 1440px;
-  font-family: 'Inter';
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  sans-serif;
   font-style: normal;
   font-weight: 400;
   margin: 0 auto;

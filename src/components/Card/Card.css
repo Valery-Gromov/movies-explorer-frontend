@@ -31,7 +31,12 @@
 }
 
 .card__like {
-
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background:none;
 }
 
 .card__duration {

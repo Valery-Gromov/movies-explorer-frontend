@@ -3,7 +3,7 @@ import linkArrow from '../../../images/linkArrow.svg';
 function Portfolio() {
     return (
         <div className="wrapper">
-            <div className="portfolio section">
+            <section className="portfolio section">
                 <h2 className="portfolio__title">Портфолио</h2>
                 <ul className="portfolio__content">
                     <li>
@@ -31,7 +31,7 @@ function Portfolio() {
                         </a>
                     </li>
                 </ul>
-            </div>
+            </section>
         </div>
     );
 }

@@ -51,6 +51,23 @@
     height: 3px;
 }
 
+.header__burger-btn.active::after {
+    transform: rotate(45deg);
+    top: 10px;
+    transition: all 0.5s ease 0s;
+}
+
+.header__burger-btn.active span {
+    transform: scale(0);
+    transition: all 0.5s ease 0s;
+}
+
+.header__burger-btn.active::before {
+    transform: rotate(-45deg);
+    top: 10px;
+    transition: all 0.5s ease 0s;
+}
+
 @media screen and (max-width: 769px) {
     .header__burger-btn {
         display: block;

@@ -8,6 +8,9 @@ function NavBar(props) {
         <div className='nav-bar'>
             <ul className={burgerMenuOpen ? 'nav-bar__content active' : 'nav-bar__content'}>
                 <div>
+                    <li className='nav-bar__main'>
+                        <Link className='nav-bar__link' to='/' >Главная</Link>
+                    </li>
                     <li>
                         <Link className='nav-bar__link' to='/movies' >Фильмы</Link>
                     </li>

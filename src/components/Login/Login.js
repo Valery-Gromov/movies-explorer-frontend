@@ -1,9 +1,10 @@
-import logo from '../../images/logo.svg'
+import logo from '../../images/logo.svg';
+import { Link } from 'react-router-dom';
 
 function Login() {
     return (
         <div className="wrapper_form">
-            <div className="login">
+            <section className="login">
                 <img className="login__logo" src={logo} alt='логотип' />
                 <h2 className='login__title'>Рады видеть!</h2>
                 <form className='login__form form'>
@@ -19,9 +20,13 @@ function Login() {
                     </div>
                     <div className='login__button-container form__button-container'>
                         <button className='login__button form__button'>Войти</button>
+                        <p className='register__has-register form__has-register'>
+                            Ещё не зарегистрированы?
+                            <a className='register__has-register-link form__has-register-link'> Регистрация</a>
+                        </p>
                     </div>
                 </form>
-            </div>
+            </section>
         </div>
     );
 }

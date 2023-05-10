@@ -16,15 +16,17 @@ function App() {
   return (
     <div className="App">
       <Header burgerMenuOpen={burgerMenuOpen} setBurgerMenuOpen={setBurgerMenuOpen} />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/movies" element={<Movies />} />
-        <Route path="/saved-movies" element={<Movies />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/signin" element={<Login />} />
-        <Route path="/signup" element={<Register />} />
-        <Route path="/*" element={<PageNotFound />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path="/signin" element={<Login />} />
+          <Route path="/signup" element={<Register />} />
+          <Route path="/" element={<Main />} />
+          <Route path="/movies" element={<Movies />} />
+          <Route path="/saved-movies" element={<Movies />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/*" element={<PageNotFound />} />
+        </Routes>
+      </main>
       <Footer />
     </div>
   );

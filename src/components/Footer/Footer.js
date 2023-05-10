@@ -1,7 +1,7 @@
 function Footer() {
     return (
         <div className="wrapper">
-            <div className="footer section">
+            <section className="footer section">
                 <h2 className='footer__title'>Учебный проект Яндекс.Практикум х BeatFilm.</h2>
                 <div className='footer__container'>
                     <p className='footer__date'>© 2023</p>
@@ -14,7 +14,7 @@ function Footer() {
                         </li>
                     </ul>
                 </div>
-            </div>
+            </section>
         </div>
     );
 }

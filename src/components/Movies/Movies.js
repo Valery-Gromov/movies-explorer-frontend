@@ -8,7 +8,7 @@ function Movies() {
     <div className="movies">
       <div className="wrapper-movies">
         <SearchForm />
-        <div className="movies__container section">
+        <section className="movies__container section">
           <Card />
           <Card />
           <Card />
@@ -18,7 +18,7 @@ function Movies() {
           <Card />
           <Card />
           <Card />
-        </div>
+        </section>
         <ShowMore />
       </div>
     </div>
