@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import NavBar from '../NavBar/NavBar';
 
 function Header(props) {
-    const {burgerMenuOpen, setBurgerMenuOpen} = props;
+    const { burgerMenuOpen, setBurgerMenuOpen, loggedIn } = props;
 
     return (
         <div className="wrapper_header">
@@ -12,9 +12,9 @@ function Header(props) {
                 <Link className="header__logo" to='/' >
                     <img src={logo} alt='Логотип' />
                 </Link>
-                <NavBar burgerMenuOpen={burgerMenuOpen} />
+                <NavBar burgerMenuOpen={burgerMenuOpen} loggedIn={loggedIn} />
                 <div onClick={() => setBurgerMenuOpen(!burgerMenuOpen)} className={burgerMenuOpen ? 'header__burger-btn active' : 'header__burger-btn'}>
-                    <span/>
+                    <span />
                 </div>
             </section>
         </div>
