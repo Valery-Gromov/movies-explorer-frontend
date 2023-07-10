@@ -7,12 +7,13 @@ import cardDeleteBtn from '../../images/cardDeleteBtn.svg'
 function SavedCard(props) {
   const { card, deleteCard } = props;
 
-  const handleCardClick = () => {
+  const handleCardClick = (e) => {
+    e.preventDefault();
     deleteCard(card)
   }
 
   return (
-    <div className="card">
+    <a className="card" href={card.trailerLink}  target='_blanck'>
       <img className="card__image" src={card.image} alt='Изображение на карточке' />
       <div className='card__content'>
         <div className="card__container">
@@ -23,7 +24,7 @@ function SavedCard(props) {
         </div>
         <span className="card__duration">{`${card.duration} мин.`}</span>
       </div>
-    </div>
+    </a>
   );
 }
 

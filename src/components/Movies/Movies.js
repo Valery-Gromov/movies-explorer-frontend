@@ -12,23 +12,21 @@ function Movies(props) {
 
   const [formValue, setFormValue] = useState({});
   const [cardsToList, setCardsToList] = useState([]);
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
   const [visible, setVisible] = useState(3);
   const [preloaderVisible, setPreloaderVisible] = useState(false);
 
-
   const hadleDurationFilter = () => {
     setPreloaderVisible(true);
+    setChecked(!checked);
+    console.log(checked);
 
     if (checked) {
-      setChecked(false);
       const filteredCards = durationFilter(cardsToList);
       setCardsToList(filteredCards);
     } else {
-      setChecked(true);
       handleTextFilter();
     }
-
     setPreloaderVisible(false);
   }
 
@@ -53,7 +51,7 @@ function Movies(props) {
 
   const handleSearchSubmit = (evt) => {
     evt.preventDefault();
-    handleTextFilter()
+    handleTextFilter();
   }
 
   const handleShowMore = () => {

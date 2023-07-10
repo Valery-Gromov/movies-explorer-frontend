@@ -107,6 +107,7 @@ function App() {
       mainApi.getToken(jwt)
         .then((res) => {
           setLoggedIn(true);
+          navigate('/movies', { replace: true });
           setCurrentUserInfo(res);
         })
         .catch(err => {

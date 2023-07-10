@@ -10,7 +10,7 @@ function SavedMovies(props) {
 
   const [formValue, setFormValue] = useState({});
   const [cardsToList, setCardsToList] = useState([]);
-  const [checked, setChecked] = useState(false);
+  const [checked, setChecked] = useState(true);
 
   useEffect(() => {
     setCardsToList(cards)
@@ -19,7 +19,6 @@ function SavedMovies(props) {
   const hadleDurationFilter = () => {
     if (checked) {
       setChecked(false);
-      console.log(cardsToList);
       const filteredCards = durationFilter(cardsToList);
       setCardsToList(filteredCards);
     } else {

@@ -1,20 +1,20 @@
 import cardSaved from '../../images/cardSaved.svg';
 import likeDefault from '../../images/like-default.svg';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import React, { useEffect, useState } from "react";
-import SavedCard from '../SavedCard/SavedCard';
+import React from "react";
 
 function Card(props) {
   const { card, handleCardLike, savedMovies } = props;
 
-  const handleCardClick = () => {
+  const handleCardClick = (e) => {
+    e.preventDefault();
     handleCardLike(card)
   }
 
   const isLiked = savedMovies.some(movie => movie.movieId === card.id);
 
   return (
-    <div className="card">
+    <a className="card" href={card.trailerLink}  target='_blanck' >
       <img className="card__image" src={`https://api.nomoreparties.co/${card.image.url}`} alt='Изображение на карточке' />
       <div className='card__content'>
         <div className="card__container">
@@ -25,7 +25,7 @@ function Card(props) {
         </div>
         <span className="card__duration">{`${card.duration} мин.`}</span>
       </div>
-    </div>
+    </a>
   );
 }
 
