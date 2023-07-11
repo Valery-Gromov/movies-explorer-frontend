@@ -1,6 +1,5 @@
 import cardSaved from '../../images/cardSaved.svg';
 import likeDefault from '../../images/like-default.svg';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import React from "react";
 
 function Card(props) {

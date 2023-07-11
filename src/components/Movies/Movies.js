@@ -19,7 +19,6 @@ function Movies(props) {
   const hadleDurationFilter = () => {
     setPreloaderVisible(true);
     setChecked(!checked);
-    console.log(checked);
 
     if (checked) {
       const filteredCards = durationFilter(cardsToList);

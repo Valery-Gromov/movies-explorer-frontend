@@ -1,7 +1,4 @@
-import cardSaved from '../../images/cardSaved.svg';
-import likeDefault from '../../images/like-default.svg';
-import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import React, { useEffect, useState } from "react";
+import React from "react";
 import cardDeleteBtn from '../../images/cardDeleteBtn.svg'
 
 function SavedCard(props) {
