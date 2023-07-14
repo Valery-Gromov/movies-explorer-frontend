@@ -41,7 +41,6 @@ function Movies(props) {
 
         jsonCardsFromLocalStorage = localStorage.getItem('cardsToList');
         arrayCardsFromLocalStorage = JSON.parse(jsonCardsFromLocalStorage);
-        console.log(arrayCardsFromLocalStorage);
 
         setFormValue({
           text: textFromLocalStorage
@@ -51,7 +50,7 @@ function Movies(props) {
         setStartFilter(false)
       }
 
-  }, [startFilter, checked, ]);
+  }, [startFilter, checked]);
 
   useEffect(() => {
     handleVisible();
@@ -136,10 +135,10 @@ function Movies(props) {
       <div className="wrapper-movies">
         <SearchForm handleChange={handleChange} hadleDurationFilter={hadleDurationFilter} checked={checked} handleSearchSubmit={handleSearchSubmit} formValue={formValue} />
         <section className="movies__container section">
-          {cardsToList.length === 0 && (<span>Вы пока ничего не искали. Введите название или описание фильма, чтобы начать поиск</span>)}
+          {cardsToList !== null && cardsToList.length === 0 && (<span>Вы пока ничего не искали. Введите название или описание фильма, чтобы начать поиск</span>)}
           <img src={preloader} className={preloaderVisible ? 'preloader preloader_active' : 'preloader'} alt='иконка загрузки' />
           {
-            cardsToList.slice(0, visible).map(card => {
+            cardsToList !== null && cardsToList.slice(0, visible).map(card => {
               return (<Card card={card} key={card.id} handleCardLike={handleCardLike} savedMovies={savedMovies} />)
             })
           }
