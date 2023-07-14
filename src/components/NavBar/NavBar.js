@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import profileIcon from '../../images/profileIcon.svg';
 
 function NavBar(props) {
@@ -14,11 +14,11 @@ function NavBar(props) {
                         </li>)}
                     {loggedIn &&
                         (<li>
-                            <Link className='nav-bar__link animation-link' to='/movies' >Фильмы</Link>
+                            <NavLink className={({isActive}) => `${isActive ? "nav-bar__link nav-bar__link_active animation-link" : "nav-bar__link animation-link"}`} to='/movies' >Фильмы</NavLink>
                         </li>)}
                     {loggedIn &&
                         (<li>
-                            <Link className='nav-bar__link animation-link' to='/saved-movies' >Сохранённые фильмы</Link>
+                            <NavLink className={({isActive}) => `${isActive ? "nav-bar__link nav-bar__link_active animation-link" : "nav-bar__link animation-link"}`} to='/saved-movies' >Сохранённые фильмы</NavLink>
                         </li>)}
                 </div>
                 <div>

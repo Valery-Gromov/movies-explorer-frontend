@@ -10,12 +10,6 @@ import preloader from '../../images/preloader.gif'
 function Movies(props) {
   const { cards, handleCardLike, savedMovies } = props;
 
-  // const textFromLocalStorage = localStorage.getItem('text');
-  // const jsonCardsFromLocalStorage = localStorage.getItem('cardsToList');
-  // const arrayCardsFromLocalStorage = JSON.parse(jsonCardsFromLocalStorage);
-  // const checkedStringFromLocalStorage = localStorage.getItem('checked');
-  // const checkedFromLocalStorage = JSON.parse(checkedStringFromLocalStorage);
-
   let textFromLocalStorage = '';
   let jsonCardsFromLocalStorage = '';
   let arrayCardsFromLocalStorage = [];
@@ -31,12 +25,16 @@ function Movies(props) {
   const [visible, setVisible] = useState(12);
   const [preloaderVisible, setPreloaderVisible] = useState(false);
   const [startFilter, setStartFilter] = useState(false);
+  const [showEmptyListMessage, setShowEmptyListMessage] = useState(false);
+  const [showWelcomeMessage, setShowWelcomeMessage] = useState(true);
 
   useEffect(() => {
 
       if (arrayCardsFromLocalStorage === null ) {
         setCardsToList([]);
+        setShowWelcomeMessage(true)
       } else {
+        setShowWelcomeMessage(false);
         textFromLocalStorage = localStorage.getItem('text');
 
         jsonCardsFromLocalStorage = localStorage.getItem('cardsToList');
@@ -54,6 +52,7 @@ function Movies(props) {
 
   useEffect(() => {
     handleVisible();
+    setChecked(checkedFromLocalStorage);
   }, []);
 
   const handleVisible = () => {
@@ -106,16 +105,16 @@ function Movies(props) {
     const { text } = formValue;
 
     const filteredCards = textFilter(cards, text);
-    // setCardsToList(filteredCards);
+    filteredCards.length === 0 ? setShowEmptyListMessage(true) : setShowEmptyListMessage(false);
     console.log(filteredCards);
     localStorage.setItem('cardsToList', JSON.stringify(filteredCards));
 
     setPreloaderVisible(false);
   }
 
-  const handleSearchSubmit = (evt) => {
+  const handleSearchSubmit = () => {
+    setShowWelcomeMessage(false)
     setStartFilter(true);
-    // evt.preventDefault();
     handleTextFilter();
   }
 
@@ -135,7 +134,9 @@ function Movies(props) {
       <div className="wrapper-movies">
         <SearchForm handleChange={handleChange} hadleDurationFilter={hadleDurationFilter} checked={checked} handleSearchSubmit={handleSearchSubmit} formValue={formValue} />
         <section className="movies__container section">
-          {cardsToList !== null && cardsToList.length === 0 && (<span>Вы пока ничего не искали. Введите название или описание фильма, чтобы начать поиск</span>)}
+          {showWelcomeMessage && (<span>Вы пока ничего не искали. Введите название или описание фильма, чтобы начать поиск</span>)}
+          {showEmptyListMessage && (<span>По вашему запросу ничего не найдено. Попробуйте ввести другой текст</span>)}
+
           <img src={preloader} className={preloaderVisible ? 'preloader preloader_active' : 'preloader'} alt='иконка загрузки' />
           {
             cardsToList !== null && cardsToList.slice(0, visible).map(card => {

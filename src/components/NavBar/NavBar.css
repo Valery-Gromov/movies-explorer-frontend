@@ -36,6 +36,10 @@
     line-height: 133%;
 }
 
+.nav-bar__link_active {
+    text-decoration: underline;
+}
+
 .animation-link {
     transition: all 500ms ease;
 }

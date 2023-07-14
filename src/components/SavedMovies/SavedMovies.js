@@ -44,8 +44,7 @@ function SavedMovies(props) {
     setCardsToList(filteredCards);
   }
 
-  const handleSearchSubmit = (evt) => {
-    evt.preventDefault();
+  const handleSearchSubmit = () => {
     handleTextFilter()
   }
 

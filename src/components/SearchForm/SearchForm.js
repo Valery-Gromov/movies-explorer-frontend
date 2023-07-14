@@ -15,8 +15,9 @@ function SearchForm(props) {
   return (
     <Formik
       initialValues={{
-        text: localStorage.getItem('text'),
+        text: formValue.text || '',
       }}
+      enableReinitialize={true}
       onSubmit={values => {
         formValue.text = values.text;
         localStorage.setItem('text', values.text);
@@ -24,7 +25,7 @@ function SearchForm(props) {
     }}
     >
       {({ errors, touched }) => (
-        <Form className={"search-form section"}>
+        <Form className={"search-form section"} noValidate>
           <label className='search-form__text-container'>
             <Field name='text' className="search-form__text-input" type="text" required validate={validateText} />
             <button className="search-form__button" type='submit'>
