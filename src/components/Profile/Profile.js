@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
@@ -6,11 +6,19 @@ function Profile(props) {
     const { setLoggedIn, handleEditSubmit } = props;
     const [edit, setEdit] = useState(false);
     const currentUserInfo = useContext(CurrentUserContext);
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false)
 
     const [formValue, setFormValue] = useState({
-        name: currentUserInfo.name,
-        email: currentUserInfo.email
+        name: '',
+        email: ''
     });
+
+    useEffect(() => {
+        setFormValue({
+            name: currentUserInfo.name,
+        email: currentUserInfo.email
+        })
+    }, [currentUserInfo])
 
 
     const handleChange = (e) => {
@@ -46,11 +54,15 @@ function Profile(props) {
         handleEditSubmit(name, email)
             .then(res => {
                 setEdit(false);
-                console.log(res);
+                setShowSuccessMessage(true)
+            })
+            .then(res => {
+                setTimeout(() => {setShowSuccessMessage(false)}, 1000);
             })
             .catch(err => {
                 console.log(err);
             })
+            
 
     }
 
@@ -63,8 +75,6 @@ function Profile(props) {
             return true;
         }
     }
-
-    console.log(isButtonActive());
 
     return (
         <div className="wrapper_form">
@@ -80,6 +90,7 @@ function Profile(props) {
                             <h3 className="profile__name">E-mail</h3>
                             <input name='email' type='email' required className="profile__value" placeholder={edit ? 'Введите новый email' : ''} disabled={!edit && true} value={formValue.email || ''} onChange={handleChange} />
                         </div>
+                        {showSuccessMessage && (<span>Данные успешно обновились</span>)}
                     </div>
                     <ul className="profile__buttons-container">
                         <li>
