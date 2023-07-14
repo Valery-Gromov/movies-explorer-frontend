@@ -22,7 +22,7 @@ function Card(props) {
             <img src={!isLiked ? likeDefault : cardSaved} alt='Кнопка лайка' />
           </button>
         </div>
-        <span className="card__duration">{`${card.duration} мин.`}</span>
+        <span className="card__duration">{`${(card.duration - card.duration % 60) / 60} ч. ${card.duration % 60} мин.`}</span>
       </div>
     </a>
   );

@@ -52,7 +52,7 @@ function SavedMovies(props) {
   return (
     <div className="saved-movies">
       <div className="wrapper-saved-movies">
-        <SearchForm handleChange={handleChange} hadleDurationFilter={hadleDurationFilter} checked={checked} handleSearchSubmit={handleSearchSubmit} />
+        <SearchForm handleChange={handleChange} hadleDurationFilter={hadleDurationFilter} checked={checked} handleSearchSubmit={handleSearchSubmit} formValue={formValue} />
         <section className="saved-movies__container section">
           {(
             cardsToList.map(card => {

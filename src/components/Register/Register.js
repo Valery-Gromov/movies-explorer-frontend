@@ -1,5 +1,5 @@
 import logo from '../../images/logo.svg';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import React from 'react';
 import { Formik, Form, Field } from 'formik';
 
@@ -28,8 +28,7 @@ const validatePassword = value => {
 }
 
 function Register(props) {
-    const { handleRegister } = props;
-    const navigate = useNavigate();
+    const { handleRegister, setLoggedIn } = props;
 
     return (
         <Formik
@@ -41,7 +40,7 @@ function Register(props) {
             onSubmit={values => {
                 handleRegister(values.name, values.email, values.password)
                     .then((res) => {
-                        navigate('/signin', { replace: true });
+                        setLoggedIn(true);
                     })
                     .catch((err) => {
                         console.log(err);

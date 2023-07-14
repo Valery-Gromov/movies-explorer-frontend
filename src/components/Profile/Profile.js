@@ -8,8 +8,8 @@ function Profile(props) {
     const currentUserInfo = useContext(CurrentUserContext);
 
     const [formValue, setFormValue] = useState({
-        name: '',
-        email: ''
+        name: currentUserInfo.name,
+        email: currentUserInfo.email
     });
 
 
@@ -26,8 +26,11 @@ function Profile(props) {
 
     const signOut = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('cardsToList');
+        localStorage.removeItem('text');
+        localStorage.removeItem('checked');
         setLoggedIn(false);
-        navigate('/signin');
+        navigate('/');
     }
 
     const handleEditClick = (e) => {
@@ -51,6 +54,18 @@ function Profile(props) {
 
     }
 
+    const isButtonActive = () => {
+        if (formValue.name !== currentUserInfo.name) {
+            return false;
+        } else if (formValue.email !== currentUserInfo.email) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    console.log(isButtonActive());
+
     return (
         <div className="wrapper_form">
             <section className="section">
@@ -59,11 +74,11 @@ function Profile(props) {
                     <div className="profile__content">
                         <div className="profile__container">
                             <h3 className="profile__name">Имя</h3>
-                            <input name='name' type='text' minLength='2' maxLength='30' required className="profile__value" placeholder={edit ? 'Введите новое имя' : ''} disabled={!edit && true} value={!edit ? currentUserInfo.name : formValue.name} onChange={handleChange} />
+                            <input name='name' type='text' minLength='2' maxLength='30' required className="profile__value" placeholder={edit ? 'Введите новое имя' : ''} disabled={!edit && true} value={formValue.name || ''} onChange={handleChange} />
                         </div>
                         <div className="profile__container">
                             <h3 className="profile__name">E-mail</h3>
-                            <input name='email' type='email' required className="profile__value" placeholder={edit ? 'Введите новый email' : ''} disabled={!edit && true} value={!edit ? currentUserInfo.email : formValue.email} onChange={handleChange} />
+                            <input name='email' type='email' required className="profile__value" placeholder={edit ? 'Введите новый email' : ''} disabled={!edit && true} value={formValue.email || ''} onChange={handleChange} />
                         </div>
                     </div>
                     <ul className="profile__buttons-container">
@@ -71,7 +86,7 @@ function Profile(props) {
                             <button type='button' className={!edit ? "profile__button" : "profile__button profile__button_unvisible"} onClick={handleEditClick} >Редактировать</button>
                         </li>
                         <li>
-                            <button type='submit' className={edit ? "profile__button" : "profile__button profile__button_unvisible"} >Сохранить</button>
+                            <button type='submit' className={edit ? "profile__button" : "profile__button profile__button_unvisible"} disabled={isButtonActive() && true} >Сохранить</button>
                         </li>
                         <li>
                             <button className="profile__button profile__button_red" onClick={signOut}>Выйти из аккаунта</button>

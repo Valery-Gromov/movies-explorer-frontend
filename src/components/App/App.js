@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Register from '../Register/Register'
 import Main from '../Main/Main';
@@ -74,8 +74,10 @@ function App() {
   const handleRegister = (name, email, password) => {
     return mainApi.register(name, email, password)
       .then((res) => {
-        console.log(res);
-        navigate('/signin', { replace: true });
+        if (res.token) {
+          localStorage.setItem('token', res.token);
+          navigate('/movies', { replace: true });
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -107,7 +109,6 @@ function App() {
       mainApi.getToken(jwt)
         .then((res) => {
           setLoggedIn(true);
-          navigate('/movies', { replace: true });
           setCurrentUserInfo(res);
         })
         .catch(err => {
@@ -152,44 +153,35 @@ function App() {
         <Header burgerMenuOpen={burgerMenuOpen} setBurgerMenuOpen={setBurgerMenuOpen} loggedIn={loggedIn} />
         <main>
           <Routes>
+            <Route path='/' element={<Main />} />
             <Route path="/signin" element={<Login handleLoginSubmit={handleLoginSubmit} setLoggedIn={setLoggedIn} />} />
-            <Route path="/signup" element={<Register handleRegister={handleRegister} />} />
+            <Route path="/signup" element={<Register handleRegister={handleRegister} setLoggedIn={setLoggedIn} />} />
             <Route
-                    path="/"
-                    element={<ProtectedRoute
-                        loggedIn={loggedIn}
-                        component={Main}
-                    />}
-                />
+              path="/movies"
+              element={<ProtectedRoute
+                component={Movies}
+                cards={cards}
+                handleCardLike={handleCardLike}
+                savedMovies={savedMovies}
+              />}
+            />
             <Route
-                    path="/movies"
-                    element={<ProtectedRoute
-                        loggedIn={loggedIn}
-                        component={Movies}
-                        cards={cards}
-                        handleCardLike={handleCardLike}
-                        savedMovies={savedMovies}
-                    />}
-                />
-                <Route
-                    path="/saved-movies"
-                    element={<ProtectedRoute
-                        loggedIn={loggedIn}
-                        component={SavedMovies}
-                        cards={savedMovies}
-                        deleteCard={deleteCard}
-                    />}
-                />
-                <Route
-                    path="/profile"
-                    element={<ProtectedRoute
-                        loggedIn={loggedIn}
-                        component={Profile}
-                        setLoggedIn={setLoggedIn}
-                        handleEditSubmit={handleEditSubmit}
-                    />}
-                />
-            <Route path="/*" element={<PageNotFound />} />
+              path="/saved-movies"
+              element={<ProtectedRoute
+                component={SavedMovies}
+                cards={savedMovies}
+                deleteCard={deleteCard}
+              />}
+            />
+            <Route
+              path="/profile"
+              element={<ProtectedRoute
+                component={Profile}
+                setLoggedIn={setLoggedIn}
+                handleEditSubmit={handleEditSubmit}
+              />}
+            />
+            <Route path="*" element={<PageNotFound />} />
           </Routes>
         </main>
         <Footer />

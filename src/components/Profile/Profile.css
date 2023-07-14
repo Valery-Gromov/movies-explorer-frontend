@@ -109,6 +109,12 @@
     line-height: 16px;
 }
 
+.profile__button:disabled {
+
+    color: gray;
+
+}
+
 .profile__button_unvisible {
     display: none;
 }
