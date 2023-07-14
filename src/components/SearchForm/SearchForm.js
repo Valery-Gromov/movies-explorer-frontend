@@ -15,7 +15,7 @@ function SearchForm(props) {
   return (
     <Formik
       initialValues={{
-        text: formValue.text,
+        text: localStorage.getItem('text'),
       }}
       onSubmit={values => {
         formValue.text = values.text;
