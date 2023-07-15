@@ -19,7 +19,7 @@ function SavedCard(props) {
             <img src={cardDeleteBtn} alt='Кнопка удаления карточки' />
           </button>
         </div>
-        <span className="card__duration">{`${card.duration} мин.`}</span>
+        <span className="card__duration">{`${(card.duration - card.duration % 60) / 60} ч. ${card.duration % 60} мин.`}</span>
       </div>
     </a>
   );

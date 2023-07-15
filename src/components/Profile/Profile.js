@@ -6,7 +6,7 @@ function Profile(props) {
     const { setLoggedIn, handleEditSubmit } = props;
     const [edit, setEdit] = useState(false);
     const currentUserInfo = useContext(CurrentUserContext);
-    const [showSuccessMessage, setShowSuccessMessage] = useState(false)
+    const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
     const [formValue, setFormValue] = useState({
         name: '',

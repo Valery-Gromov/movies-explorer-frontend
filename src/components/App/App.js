@@ -75,12 +75,10 @@ function App() {
     return mainApi.register(name, email, password)
       .then((res) => {
         if (res.token) {
+          console.log(res);
           localStorage.setItem('token', res.token);
           navigate('/movies', { replace: true });
         }
-      })
-      .catch((err) => {
-        console.log(err);
       })
   }
 

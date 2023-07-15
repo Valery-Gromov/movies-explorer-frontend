@@ -10,50 +10,100 @@ import preloader from '../../images/preloader.gif'
 function Movies(props) {
   const { cards, handleCardLike, savedMovies } = props;
 
+  let textToStorage = '';
   let textFromLocalStorage = '';
   let jsonCardsFromLocalStorage = '';
   let arrayCardsFromLocalStorage = [];
   let checkedStringFromLocalStorage = '';
   let checkedFromLocalStorage = false;
+  let checkedToStorage = false;
 
-
-  const [formValue, setFormValue] = useState({
-    text: ''
-  });
   const [cardsToList, setCardsToList] = useState([]);
-  const [checked, setChecked] = useState(true);
+  const [formValue, setFormValue] = useState([]);
+  const [checked, setChecked] = useState(false);
   const [visible, setVisible] = useState(12);
   const [preloaderVisible, setPreloaderVisible] = useState(false);
   const [startFilter, setStartFilter] = useState(false);
   const [showEmptyListMessage, setShowEmptyListMessage] = useState(false);
   const [showWelcomeMessage, setShowWelcomeMessage] = useState(true);
 
+
+  // рендер начального состояния
+  useEffect(() => {
+    // рендер кнопки checked
+    checkedStringFromLocalStorage = localStorage.getItem('checked');
+    checkedFromLocalStorage = JSON.parse(checkedStringFromLocalStorage);
+    setChecked(checkedFromLocalStorage);
+
+    // рендер текста поиска
+    textFromLocalStorage = localStorage.getItem('text');
+    setFormValue({
+      text: textFromLocalStorage
+    });
+
+    // рендер карточек
+    if (cardsToList !== null) {
+      setCardsToList(JSON.parse(localStorage.getItem('cardsToList')));
+      jsonCardsFromLocalStorage = localStorage.getItem('cardsToList');
+      arrayCardsFromLocalStorage = JSON.parse(jsonCardsFromLocalStorage);
+      arrayCardsFromLocalStorage !== null && setShowWelcomeMessage(false);
+    }
+
+    // рендер количества карточек
+    handleVisible();
+  }, []);
+
+  // Фильтр
   useEffect(() => {
 
-      if (arrayCardsFromLocalStorage === null ) {
-        setCardsToList([]);
-        setShowWelcomeMessage(true)
-      } else {
-        setShowWelcomeMessage(false);
-        textFromLocalStorage = localStorage.getItem('text');
+    if (startFilter) {
+      setPreloaderVisible(true);
+      let cardsToRender = handleTextFilter();
 
-        jsonCardsFromLocalStorage = localStorage.getItem('cardsToList');
-        arrayCardsFromLocalStorage = JSON.parse(jsonCardsFromLocalStorage);
-
-        setFormValue({
-          text: textFromLocalStorage
-        })
-        setCardsToList(arrayCardsFromLocalStorage);
-
-        setStartFilter(false)
+      if (checked) {
+        cardsToRender = hadleDurationFilter(cardsToRender);
       }
 
-  }, [startFilter, checked]);
+      localStorage.setItem('cardsToList', JSON.stringify(cardsToRender));
+      setCardsToList(cardsToRender);
 
-  useEffect(() => {
-    handleVisible();
-    setChecked(checkedFromLocalStorage);
-  }, []);
+      cardsToRender.length === 0 ? setShowEmptyListMessage(true) : setShowEmptyListMessage(false);
+
+      setStartFilter(false)
+    } else {
+      return
+    }
+
+    setPreloaderVisible(false);
+
+  }, [startFilter]);
+
+  const hadleDurationFilter = (cardsToFilter) => {
+    const filteredCards = durationFilter(cardsToFilter);
+
+    return filteredCards;
+  }
+
+  const handleTextFilter = () => {
+    const { text } = formValue;
+    textToStorage = text;
+    localStorage.setItem('text', textToStorage);
+    const filteredCards = textFilter(cards, text);
+
+    return filteredCards;
+  }
+
+  const handleSearchSubmit = () => {
+    setShowWelcomeMessage(false);
+    setStartFilter(true);
+  }
+
+  const handleDurationButton = () => {
+    checkedToStorage = !checked;
+    setChecked(!checked);
+    setStartFilter(true);
+    localStorage.setItem('checked', checkedToStorage)
+  }
 
   const handleVisible = () => {
     if (window.screen.width < 450) {
@@ -63,59 +113,6 @@ function Movies(props) {
     } else {
       setVisible(12);
     }
-  }
-
-  const hadleDurationFilter = () => {
-    setPreloaderVisible(true);
-    setChecked(!checked);
-    setStartFilter(!startFilter);
-
-    if (checked) {
-      localStorage.setItem('checked', JSON.stringify(checked));
-      checkedStringFromLocalStorage = localStorage.getItem('checked');
-      checkedFromLocalStorage = JSON.parse(checkedStringFromLocalStorage);
-
-      const filteredCards = durationFilter(cardsToList);
-      setCardsToList(filteredCards);
-      localStorage.setItem('cardsToList', JSON.stringify(filteredCards));
-
-    } else {
-      localStorage.setItem('checked', JSON.stringify(checked));
-      checkedStringFromLocalStorage = localStorage.getItem('checked');
-      checkedFromLocalStorage = JSON.parse(checkedStringFromLocalStorage);
-      handleTextFilter();
-    }
-
-    setPreloaderVisible(false);
-  }
-
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-
-    setFormValue({
-      ...formValue,
-      [name]: value
-    });
-  };
-
-  const handleTextFilter = () => {
-    setStartFilter(true);
-    setPreloaderVisible(true);
-    const { text } = formValue;
-
-    const filteredCards = textFilter(cards, text);
-    filteredCards.length === 0 ? setShowEmptyListMessage(true) : setShowEmptyListMessage(false);
-    console.log(filteredCards);
-    localStorage.setItem('cardsToList', JSON.stringify(filteredCards));
-
-    setPreloaderVisible(false);
-  }
-
-  const handleSearchSubmit = () => {
-    setShowWelcomeMessage(false)
-    setStartFilter(true);
-    handleTextFilter();
   }
 
   const handleShowMore = () => {
@@ -132,10 +129,10 @@ function Movies(props) {
   return (
     <div className="movies">
       <div className="wrapper-movies">
-        <SearchForm handleChange={handleChange} hadleDurationFilter={hadleDurationFilter} checked={checked} handleSearchSubmit={handleSearchSubmit} formValue={formValue} />
+        <SearchForm handleDurationButton={handleDurationButton} checked={checked} handleSearchSubmit={handleSearchSubmit} formValue={formValue} />
         <section className="movies__container section">
           {showWelcomeMessage && (<span>Вы пока ничего не искали. Введите название или описание фильма, чтобы начать поиск</span>)}
-          {showEmptyListMessage && (<span>По вашему запросу ничего не найдено. Попробуйте ввести другой текст</span>)}
+          {showEmptyListMessage && (<span>По вашему запросу ничего не найдено</span>)}
 
           <img src={preloader} className={preloaderVisible ? 'preloader preloader_active' : 'preloader'} alt='иконка загрузки' />
           {
