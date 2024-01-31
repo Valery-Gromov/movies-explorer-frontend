@@ -30,6 +30,8 @@
 }
 
 .page-not-found__link {
+    border: none;
+    background: none;
     margin: 0;
     padding: 0;
     text-decoration: none;

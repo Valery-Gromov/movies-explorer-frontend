@@ -4,6 +4,10 @@
     justify-content: center;
 }
 
+.show-more_none {
+    display: none;
+}
+
 .show-more__button {
     width: 320px;
     height: 36px;
@@ -13,4 +17,5 @@
     font-weight: 500;
     font-size: 12px;
     line-height: 15px;
+    cursor: pointer;
 }

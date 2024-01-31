@@ -1,6 +1,12 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function PageNotFound() {
+    const navigate = useNavigate();
+
+    const goBack = () => {
+        navigate(-1);
+    }
+    
     return (
         <div className="wrapper">
             <section className="page-not-found section">
@@ -8,7 +14,7 @@ function PageNotFound() {
                     <h2 className='page-not-found__title'>404</h2>
                     <p className='page-not-found__text'>Страница не найдена</p>
                 </div>
-                <Link className='page-not-found__link' to='/' >Назад</Link>
+                <button type='button' className='page-not-found__link' onClick={goBack} >Назад</button>
             </section>
         </div>
     );

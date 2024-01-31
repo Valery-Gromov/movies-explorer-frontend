@@ -1,9 +1,12 @@
-function ShowMore() {
+function ShowMore(props) {
+  const { handleShowMore, cardsToList, visible } = props;
+
   return (
     <div className="wrapper">
-      <section className="show-more section">
-        <button className="show-more__button">Ещё</button>
-      </section>
+      {cardsToList !== null &&
+      (<section className={cardsToList.length < visible ? "show-more section show-more_none" : "show-more section" } >
+        <button className="show-more__button" onClick={handleShowMore} >Ещё</button>
+      </section>)}
     </div>
   );
 }

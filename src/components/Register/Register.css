@@ -78,6 +78,12 @@
     font-size: 14px;
     line-height: 17px; 
     color: white;
+    cursor: pointer;
+}
+
+.form__button:disabled {
+    background-color: grey;
+    cursor: default;
 }
 
 .form__has-register {
