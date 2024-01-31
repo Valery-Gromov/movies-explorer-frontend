@@ -1,20 +1,49 @@
-import searchButton from '../../images/searchButton.svg'
+import searchButton from '../../images/searchButton.svg';
+import { Formik, Form, Field } from 'formik';
 
-function SearchForm() {
+const validateText = value => {
+  if (value.length === 0) {
+    return 'Нужно ввести ключевое слово'
+  }
+}
+
+function SearchForm(props) {
+  const { handleSearchSubmit, handleDurationButton, checked, formValue } = props;
+
+
+
   return (
-    <form className="search-form section">
-      <label className='search-form__text-container'>
-        <input className="search-form__text-input" type="text" placeholder="Фильм" required />
-        <button className="search-form__button">
-          <img src={searchButton} alt='кнопка поиска' />
-        </button>
-      </label>
-      <label className='search-form__checkbox-container'>
-        <span className='search-form__checkbox-title'>Короткометражки</span>
-        <input className="search-form__checkbox-input" type="checkbox" />
-        <span className='search-form__image' />
-      </label>
-    </form>
+    <Formik
+      initialValues={{
+        text: formValue.text || '',
+      }}
+      enableReinitialize={true}
+      onSubmit={values => {
+        formValue.text = values.text;
+        handleSearchSubmit();
+    }}
+    >
+      {({ errors, touched }) => (
+        <Form className={"search-form section"} noValidate>
+          <label className='search-form__text-container'>
+            <Field name='text' className="search-form__text-input" type="text" required validate={validateText} />
+            <button className="search-form__button" type='submit'>
+              <img src={searchButton} alt='кнопка поиска' />
+            </button>
+          </label>
+          {errors.text && touched.text && (
+            <div>{errors.text}</div>
+          )}
+          <label className={!checked ? 'search-form__checkbox-container' : 'search-form__checkbox-container search-form__checkbox-container_checked'} >
+            <span className='search-form__checkbox-title'>Короткометражки</span>
+            <input name='checkbox' onChange={handleDurationButton} className="search-form__checkbox-input" type="checkbox" />
+            <span className='search-form__image' />
+          </label>
+        </Form>
+
+      )}
+
+    </Formik>
   );
 }
 
