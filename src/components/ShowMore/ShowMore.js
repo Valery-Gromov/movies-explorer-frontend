@@ -5,7 +5,7 @@ function ShowMore(props) {
     <div className="wrapper">
       {cardsToList !== null &&
       (<section className={cardsToList.length < visible ? "show-more section show-more_none" : "show-more section" } >
-        <button className="show-more__button" onClick={handleShowMore} >Ещё</button>
+        <button className="show-more__button" onClick={handleShowMore} >More</button>
       </section>)}
     </div>
   );

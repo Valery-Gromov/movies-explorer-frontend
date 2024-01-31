@@ -1,6 +1,5 @@
 class MoviesApi {
     constructor({ baseUrl }) {
-        // тело конструктора
         this._baseUrl = baseUrl;
     }
 

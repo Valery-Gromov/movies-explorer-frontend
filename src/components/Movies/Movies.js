@@ -131,8 +131,8 @@ function Movies(props) {
       <div className="wrapper-movies">
         <SearchForm handleDurationButton={handleDurationButton} checked={checked} handleSearchSubmit={handleSearchSubmit} formValue={formValue} />
         <section className="movies__container section">
-          {showWelcomeMessage && (<span>Вы пока ничего не искали. Введите название или описание фильма, чтобы начать поиск</span>)}
-          {showEmptyListMessage && (<span>По вашему запросу ничего не найдено</span>)}
+          {showWelcomeMessage && (<span>You haven't searched for anything yet. Enter the title or description of the movie to start the search</span>)}
+          {showEmptyListMessage && (<span>Nothing was found for your query</span>)}
 
           <img src={preloader} className={preloaderVisible ? 'preloader preloader_active' : 'preloader'} alt='иконка загрузки' />
           {

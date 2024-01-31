@@ -1,6 +1,5 @@
 class MainApi {
     constructor({ baseUrl }) {
-        // тело конструктора
         this._baseUrl = baseUrl;
     }
 

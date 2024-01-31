@@ -3,7 +3,7 @@ import { Formik, Form, Field } from 'formik';
 
 const validateText = value => {
   if (value.length === 0) {
-    return 'Нужно ввести ключевое слово'
+    return 'You need to enter a keyword'
   }
 }
 
@@ -28,14 +28,14 @@ function SearchForm(props) {
           <label className='search-form__text-container'>
             <Field name='text' className="search-form__text-input" type="text" required validate={validateText} />
             <button className="search-form__button" type='submit'>
-              <img src={searchButton} alt='кнопка поиска' />
+              <img src={searchButton} alt='the search button' />
             </button>
           </label>
           {errors.text && touched.text && (
             <div>{errors.text}</div>
           )}
           <label className={!checked ? 'search-form__checkbox-container' : 'search-form__checkbox-container search-form__checkbox-container_checked'} >
-            <span className='search-form__checkbox-title'>Короткометражки</span>
+            <span className='search-form__checkbox-title'>Short films</span>
             <input name='checkbox' onChange={handleDurationButton} className="search-form__checkbox-input" type="checkbox" />
             <span className='search-form__image' />
           </label>

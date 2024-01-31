@@ -5,25 +5,25 @@ import { Formik, Form, Field } from 'formik';
 
 const validateName = value => {
     if (!value) {
-        return 'Обязательное поле'
+        return 'Required field'
     } else if (2 > value.length) {
-        return 'Имя должно содержать больше 2 символов'
+        return 'The name must contain more than 2 characters'
     } else if (value.length > 30) {
-        return 'Имя должно содержать меньше 30 символов'
+        return 'The name must contain less than 30 characters'
     }
 }
 
 const validateEmail = value => {
     if (!value) {
-        return 'Обязательное поле'
+        return 'Required field'
     } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
-        return 'Некорректный Email-адрес'
+        return 'Invalid Email address'
     }
 }
 
 const validatePassword = value => {
     if (!value) {
-        return 'Обязательное поле'
+        return 'Required field'
     }
 }
 
@@ -64,12 +64,12 @@ function Register(props) {
             {({ errors, touched, isValid, values }) => (
                 <div className="wrapper_form">
                     <section className="register">
-                        <img className="register__logo" src={logo} alt='логотип' />
-                        <h2 className='register__title'>Добро пожаловать!</h2>
+                        <img className="register__logo" src={logo} alt='Logo' />
+                        <h2 className='register__title'>Welcome!</h2>
                         <Form className='register__form form'>
                             <div className='register__inputs form__inputs'>
                                 <label className='register__input-container form__input-container'>
-                                    <span className='register__input-name form__input-name'>Имя</span>
+                                    <span className='register__input-name form__input-name'>Name</span>
                                     <Field name='name' className='register__input form__input' type='text' disabled={disabled && true} validate={validateName} />
                                     {errors.name && touched.name && (
                                         <div>{errors.name}</div>
@@ -83,7 +83,7 @@ function Register(props) {
                                     )}
                                 </label>
                                 <label className='register__input-container form__input-container'>
-                                    <span className='register__input-name form__input-name'>Пароль</span>
+                                    <span className='register__input-name form__input-name'>Password</span>
                                     <Field name='password' className='register__input form__input' type='password' disabled={disabled && true} validate={validatePassword} />
                                     {errors.password && touched.password && (
                                         <div>{errors.password}</div>
@@ -91,11 +91,11 @@ function Register(props) {
                                 </label>
                             </div>
                             <div className='register__button-container form__button-container'>
-                                <button type='submit' disabled={!isValid || values.name === '' || values.email === '' || values.password === '' || disabled && true} className='register__button form__button'>Зарегистрироваться</button>
+                                <button type='submit' disabled={!isValid || values.name === '' || values.email === '' || values.password === '' || disabled && true} className='register__button form__button'>Sign up</button>
                                 {showErrorMessage && (<span>{textError}</span>)}
                                 <p className='register__has-register form__has-register'>
-                                    Уже зарегистрированы?
-                                    <Link className='register__has-register-link form__has-register-link' to='/signin'> Войти</Link>
+                                    Already signed up?
+                                    <Link className='register__has-register-link form__has-register-link' to='/signin'> Login</Link>
                                 </p>
                             </div>
                         </Form>

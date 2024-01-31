@@ -83,24 +83,24 @@ function Profile(props) {
                     <h2 className='profile__title'>{`Привет, ${currentUserInfo.name}`}</h2>
                     <div className="profile__content">
                         <div className="profile__container">
-                            <h3 className="profile__name">Имя</h3>
-                            <input name='name' type='text' minLength='2' maxLength='30' required className="profile__value" placeholder={edit ? 'Введите новое имя' : ''} disabled={!edit && true} value={formValue.name || ''} onChange={handleChange} />
+                            <h3 className="profile__name">Name</h3>
+                            <input name='name' type='text' minLength='2' maxLength='30' required className="profile__value" placeholder={edit ? 'Enter a new name' : ''} disabled={!edit && true} value={formValue.name || ''} onChange={handleChange} />
                         </div>
                         <div className="profile__container">
                             <h3 className="profile__name">E-mail</h3>
-                            <input name='email' type='email' required className="profile__value" placeholder={edit ? 'Введите новый email' : ''} disabled={!edit && true} value={formValue.email || ''} onChange={handleChange} />
+                            <input name='email' type='email' required className="profile__value" placeholder={edit ? 'Enter a new email address' : ''} disabled={!edit && true} value={formValue.email || ''} onChange={handleChange} />
                         </div>
-                        {showSuccessMessage && (<span>Данные успешно обновились</span>)}
+                        {showSuccessMessage && (<span>The data has been successfully updated</span>)}
                     </div>
                     <ul className="profile__buttons-container">
                         <li>
-                            <button type='button' className={!edit ? "profile__button" : "profile__button profile__button_unvisible"} onClick={handleEditClick} >Редактировать</button>
+                            <button type='button' className={!edit ? "profile__button" : "profile__button profile__button_unvisible"} onClick={handleEditClick} >Edit</button>
                         </li>
                         <li>
-                            <button type='submit' className={edit ? "profile__button" : "profile__button profile__button_unvisible"} disabled={isButtonActive() && true} >Сохранить</button>
+                            <button type='submit' className={edit ? "profile__button" : "profile__button profile__button_unvisible"} disabled={isButtonActive() && true} >Save</button>
                         </li>
                         <li>
-                            <button className="profile__button profile__button_red" onClick={signOut}>Выйти из аккаунта</button>
+                            <button className="profile__button profile__button_red" onClick={signOut}>Log out of your account</button>
                         </li>
                     </ul>
                 </form>

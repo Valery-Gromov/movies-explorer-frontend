@@ -10,15 +10,15 @@ function NavBar(props) {
                 <div>
                     {loggedIn &&
                         (<li className='nav-bar__main'>
-                            <Link className='nav-bar__link animation-link' to='/' >Главная</Link>
+                            <Link className='nav-bar__link animation-link' to='/' >Main</Link>
                         </li>)}
                     {loggedIn &&
                         (<li>
-                            <NavLink className={({isActive}) => `${isActive ? "nav-bar__link nav-bar__link_active animation-link" : "nav-bar__link animation-link"}`} to='/movies' >Фильмы</NavLink>
+                            <NavLink className={({isActive}) => `${isActive ? "nav-bar__link nav-bar__link_active animation-link" : "nav-bar__link animation-link"}`} to='/movies' >Movies</NavLink>
                         </li>)}
                     {loggedIn &&
                         (<li>
-                            <NavLink className={({isActive}) => `${isActive ? "nav-bar__link nav-bar__link_active animation-link" : "nav-bar__link animation-link"}`} to='/saved-movies' >Сохранённые фильмы</NavLink>
+                            <NavLink className={({isActive}) => `${isActive ? "nav-bar__link nav-bar__link_active animation-link" : "nav-bar__link animation-link"}`} to='/saved-movies' >Saved movies</NavLink>
                         </li>)}
                 </div>
                 <div>
@@ -31,11 +31,11 @@ function NavBar(props) {
                         </li>)}
                     {!loggedIn &&
                         (<li>
-                            <Link className='nav-bar__link animation-link' to='/signup' >Регистрация</Link>
+                            <Link className='nav-bar__link animation-link' to='/signup' >Signup</Link>
                         </li>)}
                     {!loggedIn &&
                         (<li>
-                            <Link className='nav-bar__link animation-link nav-bar__link_black' to='/signin' >Войти</Link>
+                            <Link className='nav-bar__link animation-link nav-bar__link_black' to='/signin' >Login</Link>
                         </li>)}
                 </div>
             </ul>

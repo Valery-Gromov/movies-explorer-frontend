@@ -14,15 +14,15 @@ function Card(props) {
 
   return (
     <a className="card" href={card.trailerLink}  target='_blanck' >
-      <img className="card__image" src={`https://api.nomoreparties.co/${card.image.url}`} alt='Изображение на карточке' />
+      <img className="card__image" src={`https://api.nomoreparties.co/${card.image.url}`} alt='The image on the card' />
       <div className='card__content'>
         <div className="card__container">
           <h2 className="card__title">{card.nameRU}</h2>
           <button className="card__like" onClick={handleCardClick}>
-            <img src={!isLiked ? likeDefault : cardSaved} alt='Кнопка лайка' />
+            <img src={!isLiked ? likeDefault : cardSaved} alt='Like button' />
           </button>
         </div>
-        <span className="card__duration">{`${(card.duration - card.duration % 60) / 60} ч. ${card.duration % 60} мин.`}</span>
+        <span className="card__duration">{`${(card.duration - card.duration % 60) / 60} h. ${card.duration % 60} min.`}</span>
       </div>
     </a>
   );

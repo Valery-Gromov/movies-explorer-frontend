@@ -4,24 +4,23 @@ function AboutMe() {
     return (
         <div className="wrapper">
             <section className="about-me section" id='about-me'>
-                <h2 className="about-me__title section__title">Студент</h2>
+                <h2 className="about-me__title section__title">Student</h2>
                 <div className="about-me__content">
                     <div className="about-me__text-container">
                         <div className="about-me__profile">
                             <p className="about-me__name">
-                                Валерий
+                                Valery
                             </p>
                             <p className="about-me__job">
-                                Фронтенд-разработчик, 27 лет
+                                Frontend developer, 27 years old
                             </p>
                             <p className="about-me__bio">
-                                Я родился и живу в Саратове, закончил факультет экономики СГУ. У меня есть жена
-                                и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. С 2015 года работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься фриланс-заказами и ушёл с постоянной работы.
+                                Have experience in front-end and back-end development. Have good Knowledge and experience with JavaScript (including ES6), HTML5, CSS3, SCSS, TypeScript, ReactJS, NodeJS, and Express.js. Have a demonstrable skills in implementing responsive websites. I am strong team player who can use initiative and self-manage. Have a good communication skills and interpersonal skills.
                             </p>
                         </div>
                         <a className="about-me__link" href='#'>Github</a>
                     </div>
-                    <img className="about-me__photo" src={profilePhoto} alt='моя фотография' />
+                    <img className="about-me__photo" src={profilePhoto} alt='my photo' />
                 </div>
             </section>
         </div>
